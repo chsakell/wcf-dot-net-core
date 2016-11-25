@@ -10,6 +10,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Self.Host
@@ -23,8 +24,11 @@ namespace Self.Host
             {
                 using (var container = InitBuilder().Build())
                 {
-                    var httpTask = Task.Run(() => HostHttpService(container));
-                    var netTcpTask = Task.Run(() => HostNetTcpService(container));
+                    Thread t1, t2;
+                    t1 = new Thread(t => { HostHttpService(container); });
+                    t2 = new Thread(t => { HostNetTcpService(container); });
+                    t1.Start();
+                    t2.Start();
                 }
 
                 Console.WriteLine("Press any key to terminate..");
