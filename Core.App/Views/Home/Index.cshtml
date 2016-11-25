@@ -1,6 +1,9 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@model Connected.Service.ArticleService.Article[]
+
 @{
     Layout = null;
 }
@@ -12,8 +15,21 @@
 </head>
 <body>
 
-    <h1>This is a Heading</h1>
-    <p>This is a paragraph.</p>
+    <h1>Articles</h1>
+
+    <table>
+        @foreach (var article in Model)
+        {
+            <tr>
+                <td>@article.Title</td>
+                <td><a href="@article.URL" target="_blank">Link</a></td>
+                <td>@article.Author</td>
+                <td>@article.Contents</td>
+            </tr>
+        }
+    </table>
+
+
 
 </body>
 </html>

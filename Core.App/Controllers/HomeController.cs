@@ -21,7 +21,7 @@ namespace Core.App.Controllers
         {
             Connected.Service.BlogService.Blog _blog = GetBlog();
             Connected.Service.ArticleService.Article[] _articles = GetArticles();
-            return View();
+            return View(_articles);
         }
 
         private Connected.Service.BlogService.Blog GetBlog()
