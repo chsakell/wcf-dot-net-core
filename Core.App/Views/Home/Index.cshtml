@@ -6,6 +6,7 @@
 
 @{
     Layout = null;
+    var blog = (Connected.Service.BlogService.Blog)ViewBag.Blog;
 }
 
 <!DOCTYPE html>
@@ -14,6 +15,17 @@
     <title>Page Title</title>
 </head>
 <body>
+
+    <h1>First blog: </h1>
+    <p>
+        <table>
+            <tr>
+                <td>@blog.Name</td>
+                <td>@blog.Owner</td>
+                <td><a href="@blog.URL" target="_blank">Link</a></td>
+            </tr>
+        </table>
+    </p>
 
     <h1>Articles</h1>
 

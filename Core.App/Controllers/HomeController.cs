@@ -20,6 +20,8 @@ namespace Core.App.Controllers
         public IActionResult Index()
         {
             Connected.Service.BlogService.Blog _blog = GetBlog();
+            ViewBag.Blog = _blog;
+
             Connected.Service.ArticleService.Article[] _articles = GetArticles();
             return View(_articles);
         }
