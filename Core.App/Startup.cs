@@ -16,6 +16,17 @@ namespace Core.App
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddScoped<Connected.Service.BlogService.IBlogService, Connected.Service.BlogService.BlogServiceClient>();
+            //services.AddScoped<Connected.Service.ArticleService.IArticleService, Connected.Service.ArticleService.ArticleServiceClient>();
+            services.AddSingleton(typeof(Connected.Service.BlogService.IBlogService),
+                new Connected.Service.BlogService.BlogServiceClient(Connected.Service.BlogService.BlogServiceClient.EndpointConfiguration.BasicHttpBinding_IBlogService,
+                "http://localhost:8090/BlogHttpService"));
+
+            services.AddSingleton(typeof(Connected.Service.ArticleService.IArticleService),
+                new Connected.Service.ArticleService.ArticleServiceClient(Connected.Service.ArticleService.ArticleServiceClient.EndpointConfiguration.NetTcpBinding_IArticleService,
+                "net.tcp://localhost:8080/ArticleNetTcpService"));
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,9 +39,11 @@ namespace Core.App
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

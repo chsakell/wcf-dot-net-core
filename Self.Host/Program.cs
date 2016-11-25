@@ -22,24 +22,7 @@ namespace Self.Host
         {
             try
             {
-                using (var container = InitBuilder().Build())
-                {
-                    Thread t1, t2;
-                    t1 = new Thread(t => { HostHttpService(container); });
-                    t2 = new Thread(t => { HostNetTcpService(container); });
-                    t1.Start();
-                    t2.Start();
-                }
-
-                Console.WriteLine("Press any key to terminate..");
-                Console.ReadKey();
-
-                if (httpHost != null && httpHost.State == CommunicationState.Opened)
-                    httpHost.Close();
-
-                if (netTcpHost != null && netTcpHost.State == CommunicationState.Opened)
-                    netTcpHost.Close();
-
+                HostServices();
             }
             catch (Exception ex)
             {
@@ -64,29 +47,52 @@ namespace Self.Host
             return builder;
         }
 
-        static void HostHttpService(IContainer container)
+        static void HostServices()
         {
-            // Create two different URIs to serve as the base address
-            // One for http requests and another for net.tcp
-            Uri httpUrl = new Uri("http://localhost:8090/BlogHttpService");
+            using (var container = InitBuilder().Build())
+            {
+                // Create two different URIs to serve as the base address
+                // One for http requests and another for net.tcp
+                Uri httpUrl = new Uri("http://localhost:8090/BlogHttpService");
+                Uri netTcpUrl = new Uri("net.tcp://localhost:8080/ArticleNetTcpService");
 
-            //Create ServiceHost to host the service in the console application
-            httpHost = new ServiceHost(typeof(BlogService), httpUrl);
+                //Create ServiceHost to host the service in the console application
+                httpHost = new ServiceHost(typeof(BlogService), httpUrl);
+                netTcpHost = new ServiceHost(typeof(ArticleService), netTcpUrl);
 
-            // Enable metadata exchange - you need this so others can create proxies
-            // to consume your WCF service
-            ServiceMetadataBehavior serviceMetaBehavior = new ServiceMetadataBehavior();
-            serviceMetaBehavior.HttpGetEnabled = true;
-            httpHost.Description.Behaviors.Add(serviceMetaBehavior);
+                // Enable metadata exchange - you need this so others can create proxies
+                // to consume your WCF service
+                ServiceMetadataBehavior serviceMetaBehavior = new ServiceMetadataBehavior();
+                httpHost.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
+                httpHost.Description.Behaviors.Add(
+                    new ServiceDebugBehavior { IncludeExceptionDetailInFaults = true });
 
-            // Set dependency injection
-            httpHost.AddDependencyInjectionBehavior<IBlogService>(container);
+                httpHost.Description.Behaviors.Add(serviceMetaBehavior);
+                netTcpHost.Description.Behaviors.Add(serviceMetaBehavior);
 
-            // Start the Service
-            httpHost.Open();
+                netTcpHost.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
 
-            Console.WriteLine("IBlogService Service is host at " + DateTime.Now.ToString());
-            Console.WriteLine();
+                // Set dependency injection
+                httpHost.AddDependencyInjectionBehavior<IBlogService>(container);
+                netTcpHost.AddDependencyInjectionBehavior<IArticleService>(container);
+
+                // Start the Services
+                httpHost.Open();
+                netTcpHost.Open();
+
+                Console.WriteLine("IBlogService Service is host at " + DateTime.Now.ToString());
+                Console.WriteLine("IArticleService Service is host at " + DateTime.Now.ToString());
+                Console.WriteLine();
+
+                Console.WriteLine("Press any key to terminate..");
+                Console.ReadKey();
+
+                if (httpHost != null && httpHost.State == CommunicationState.Opened)
+                    httpHost.Close();
+
+                if (netTcpHost != null && netTcpHost.State == CommunicationState.Opened)
+                    netTcpHost.Close();
+            }
         }
 
         static void HostNetTcpService(IContainer container)
@@ -101,7 +107,7 @@ namespace Self.Host
             // Enable metadata exchange - you need this so others can create proxies
             // to consume your WCF service
             ServiceMetadataBehavior serviceMetaBehavior = new ServiceMetadataBehavior();
-            
+
             netTcpHost.Description.Behaviors.Add(serviceMetaBehavior);
 
             netTcpHost.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
