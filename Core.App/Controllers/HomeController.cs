@@ -20,7 +20,7 @@ namespace Core.App.Controllers
         public IActionResult Index()
         {
             Connected.Service.BlogService.Blog _blog = GetBlog();
-            Connected.Service.ArticleService.Article _article = GetArticle();
+            Connected.Service.ArticleService.Article[] _articles = GetArticles();
             return View();
         }
 
@@ -29,9 +29,9 @@ namespace Core.App.Controllers
             return _blogHttpClient.GetByIdAsync(1).Result;
         }
 
-        private Connected.Service.ArticleService.Article GetArticle()
+        private Connected.Service.ArticleService.Article[] GetArticles()
         {
-            return _articleNetTcpClient.GetByIdAsync(1).Result;
+            return _articleNetTcpClient.GetAllAsync().Result;
         }
     }
 }
