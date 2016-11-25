@@ -101,8 +101,10 @@ namespace Self.Host
             // Enable metadata exchange - you need this so others can create proxies
             // to consume your WCF service
             ServiceMetadataBehavior serviceMetaBehavior = new ServiceMetadataBehavior();
-            //serviceMetaBehavior.HttpGetEnabled = true;
+            
             netTcpHost.Description.Behaviors.Add(serviceMetaBehavior);
+
+            netTcpHost.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
 
             // Set dependency injection
             netTcpHost.AddDependencyInjectionBehavior<IArticleService>(container);
