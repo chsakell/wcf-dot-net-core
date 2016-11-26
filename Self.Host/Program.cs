@@ -62,13 +62,15 @@ namespace Self.Host
 
                 // Enable metadata exchange - you need this so others can create proxies
                 // to consume your WCF service
-                ServiceMetadataBehavior serviceMetaBehavior = new ServiceMetadataBehavior();
+                ServiceMetadataBehavior httpServiceMetaBehavior = new ServiceMetadataBehavior();
+                ServiceMetadataBehavior netTcpServiceMetaBehavior = new ServiceMetadataBehavior();
                 httpHost.Description.Behaviors.Remove(typeof(ServiceDebugBehavior));
                 httpHost.Description.Behaviors.Add(
                     new ServiceDebugBehavior { IncludeExceptionDetailInFaults = true });
 
-                httpHost.Description.Behaviors.Add(serviceMetaBehavior);
-                netTcpHost.Description.Behaviors.Add(serviceMetaBehavior);
+                httpServiceMetaBehavior.HttpGetEnabled = true;
+                httpHost.Description.Behaviors.Add(httpServiceMetaBehavior);
+                netTcpHost.Description.Behaviors.Add(netTcpServiceMetaBehavior);
 
                 netTcpHost.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
 

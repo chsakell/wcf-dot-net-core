@@ -16,8 +16,6 @@ namespace Data.Core.Configurations
             Property(b => b.Name).IsRequired().HasMaxLength(100);
             Property(b => b.URL).IsRequired().HasMaxLength(200);
             Property(b => b.Owner).IsRequired().HasMaxLength(50);
-
-            Ignore(b => b.ExtensionData);
         }
     }
 }

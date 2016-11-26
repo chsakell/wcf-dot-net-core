@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Business.Entities
 {
     [DataContract]
-    public class Blog : IExtensibleDataObject
+    public class Blog
     {
         [DataMember]
         public int ID { get; set; }
@@ -18,11 +18,5 @@ namespace Business.Entities
         public string URL { get; set; }
         [DataMember]
         public string Owner { get; set; }
-
-        #region IExtensibleDataObject Members
-
-        public ExtensionDataObject ExtensionData { get; set; }
-
-        #endregion
     }
 }

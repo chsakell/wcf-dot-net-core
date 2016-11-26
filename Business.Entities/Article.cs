@@ -3,7 +3,7 @@
 namespace Business.Entities
 {
     [DataContract]
-    public class Article : IExtensibleDataObject
+    public class Article
     {
         [DataMember]
         public int ID { get; set; }
@@ -17,21 +17,5 @@ namespace Business.Entities
         public string URL { get; set; }
         [DataMember]
         public int BlogID { get; set; }
-
-        [DataMember]
-        public int ContentLength
-        {
-            get
-            {
-                return Contents.Length;
-            }
-            set { }
-        }
-
-        #region IExtensibleDataObject Members
-
-        public ExtensionDataObject ExtensionData { get; set; }
-
-        #endregion
     }
 }

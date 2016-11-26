@@ -22,8 +22,6 @@ namespace Connected.Service.ArticleService
         
         private int BlogIDField;
         
-        private int ContentLengthField;
-        
         private string ContentsField;
         
         private int IDField;
@@ -55,19 +53,6 @@ namespace Connected.Service.ArticleService
             set
             {
                 this.BlogIDField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ContentLength
-        {
-            get
-            {
-                return this.ContentLengthField;
-            }
-            set
-            {
-                this.ContentLengthField = value;
             }
         }
         
