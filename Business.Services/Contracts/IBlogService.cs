@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business.Services.Contracts
 {
-    [ServiceContract]
+    [ServiceContract(Namespace = "http://www.chsakell.com/dotnetcorewcfproxies")]
     public interface IBlogService
     {
         [OperationContract]

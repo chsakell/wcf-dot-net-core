@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Business.Entities
 {
-    [DataContract]
+    [DataContract(Namespace = "http://www.chsakell.com/dotnetcorewcfproxies")]
     public class Blog
     {
         [DataMember]

@@ -14,7 +14,7 @@ namespace Connected.Service.BlogService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.4.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Blog", Namespace="http://schemas.datacontract.org/2004/07/Business.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Blog", Namespace="http://www.chsakell.com/dotnetcorewcfproxies")]
     public partial class Blog : object
     {
         
@@ -80,20 +80,20 @@ namespace Connected.Service.BlogService
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.4.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Connected.Service.BlogService.IBlogService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.chsakell.com/dotnetcorewcfproxies", ConfigurationName="Connected.Service.BlogService.IBlogService")]
     public interface IBlogService
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/Add", ReplyAction="http://tempuri.org/IBlogService/AddResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IBlogService/Add", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IBlogService/AddResponse")]
         System.Threading.Tasks.Task AddAsync(Connected.Service.BlogService.Blog blog);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/Update", ReplyAction="http://tempuri.org/IBlogService/UpdateResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IBlogService/Update", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IBlogService/UpdateResponse")]
         System.Threading.Tasks.Task UpdateAsync(Connected.Service.BlogService.Blog blog);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/Delete", ReplyAction="http://tempuri.org/IBlogService/DeleteResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IBlogService/Delete", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IBlogService/DeleteResponse")]
         System.Threading.Tasks.Task DeleteAsync(Connected.Service.BlogService.Blog blog);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBlogService/GetById", ReplyAction="http://tempuri.org/IBlogService/GetByIdResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IBlogService/GetById", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IBlogService/GetByIdResponse")]
         System.Threading.Tasks.Task<Connected.Service.BlogService.Blog> GetByIdAsync(int id);
     }
     

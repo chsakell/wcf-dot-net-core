@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.ServiceModel;
 
 namespace Core.App
 {
@@ -16,8 +17,7 @@ namespace Core.App
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddScoped<Connected.Service.BlogService.IBlogService, Connected.Service.BlogService.BlogServiceClient>();
-            //services.AddScoped<Connected.Service.ArticleService.IArticleService, Connected.Service.ArticleService.ArticleServiceClient>();
+            // Connected Services
             services.AddSingleton(typeof(Connected.Service.BlogService.IBlogService),
                 new Connected.Service.BlogService.BlogServiceClient(Connected.Service.BlogService.BlogServiceClient.EndpointConfiguration.BasicHttpBinding_IBlogService,
                 "http://localhost:8090/BlogHttpService"));
@@ -25,6 +25,11 @@ namespace Core.App
             services.AddSingleton(typeof(Connected.Service.ArticleService.IArticleService),
                 new Connected.Service.ArticleService.ArticleServiceClient(Connected.Service.ArticleService.ArticleServiceClient.EndpointConfiguration.NetTcpBinding_IArticleService,
                 "net.tcp://localhost:8080/ArticleNetTcpService"));
+
+            // External Lib services
+            var netTcpBinding = new NetTcpBinding();
+            services.AddSingleton(typeof(External.Lib.IArticleService),
+                new External.Lib.ArticleServiceClientExt(netTcpBinding, new EndpointAddress("net.tcp://localhost:8080/ArticleNetTcpService")));
 
             services.AddMvc();
         }

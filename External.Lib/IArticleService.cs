@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace External.Lib
 {
+    [ServiceContract(Namespace = "http://www.chsakell.com/dotnetcorewcfproxies")]
     public interface IArticleService
     {
-
         [OperationContract]
         Task AddAsync(Article article);
 
@@ -26,7 +26,7 @@ namespace External.Lib
         Task<Article[]> GetAllAsync();
     }
 
-    [DataContract]
+    [DataContract(Namespace = "http://www.chsakell.com/dotnetcorewcfproxies")]
     public class Article
     {
         [DataMember]

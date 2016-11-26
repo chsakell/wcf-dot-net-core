@@ -14,7 +14,7 @@ namespace Connected.Service.ArticleService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.4.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Article", Namespace="http://schemas.datacontract.org/2004/07/Business.Entities")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Article", Namespace="http://www.chsakell.com/dotnetcorewcfproxies")]
     public partial class Article : object
     {
         
@@ -110,23 +110,23 @@ namespace Connected.Service.ArticleService
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.4.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Connected.Service.ArticleService.IArticleService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.chsakell.com/dotnetcorewcfproxies", ConfigurationName="Connected.Service.ArticleService.IArticleService")]
     public interface IArticleService
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticleService/Add", ReplyAction="http://tempuri.org/IArticleService/AddResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/Add", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/AddResponse")]
         System.Threading.Tasks.Task AddAsync(Connected.Service.ArticleService.Article article);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticleService/Update", ReplyAction="http://tempuri.org/IArticleService/UpdateResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/Update", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/UpdateResponse")]
         System.Threading.Tasks.Task UpdateAsync(Connected.Service.ArticleService.Article article);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticleService/Delete", ReplyAction="http://tempuri.org/IArticleService/DeleteResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/Delete", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/DeleteResponse")]
         System.Threading.Tasks.Task DeleteAsync(Connected.Service.ArticleService.Article article);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticleService/GetById", ReplyAction="http://tempuri.org/IArticleService/GetByIdResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/GetById", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/GetByIdResponse")]
         System.Threading.Tasks.Task<Connected.Service.ArticleService.Article> GetByIdAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IArticleService/GetAll", ReplyAction="http://tempuri.org/IArticleService/GetAllResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/GetAll", ReplyAction="http://www.chsakell.com/dotnetcorewcfproxies/IArticleService/GetAllResponse")]
         System.Threading.Tasks.Task<Connected.Service.ArticleService.Article[]> GetAllAsync();
     }
     

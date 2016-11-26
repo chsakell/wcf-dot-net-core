@@ -3763,6 +3763,24 @@
         "runtime": {
           "netstandard1.6/Connected.Service.dll": {}
         }
+      },
+      "External.Lib/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.ServiceModel.Duplex": "4.0.1",
+          "System.ServiceModel.Http": "4.1.0",
+          "System.ServiceModel.NetTcp": "4.1.0",
+          "System.ServiceModel.Security": "4.0.1",
+          "System.Xml.XmlSerializer": "4.0.11"
+        },
+        "compile": {
+          "netstandard1.6/External.Lib.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/External.Lib.dll": {}
+        }
       }
     }
   },
@@ -10318,11 +10336,17 @@
       "type": "project",
       "path": "../Connected.Service/project.json",
       "msbuildProject": "../Connected.Service/Connected.Service.xproj"
+    },
+    "External.Lib/1.0.0": {
+      "type": "project",
+      "path": "../External.Lib/project.json",
+      "msbuildProject": "../External.Lib/External.Lib.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
       "Connected.Service >= 1.0.0-*",
+      "External.Lib >= 1.0.0-*",
       "Microsoft.AspNetCore.Diagnostics >= 1.1.0",
       "Microsoft.AspNetCore.Mvc >= 1.1.0",
       "Microsoft.AspNetCore.Server.IISIntegration >= 1.1.0",
