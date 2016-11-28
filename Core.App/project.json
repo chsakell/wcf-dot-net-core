@@ -10,7 +10,8 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Connected.Service": "1.0.0-*",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
-    "External.Lib": "1.0.0-*"
+    "External.Lib": "1.0.0-*",
+    "Microsoft.AspNetCore.StaticFiles": "1.1.0"
   },
 
   "tools": {
