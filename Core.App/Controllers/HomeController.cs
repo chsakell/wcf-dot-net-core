@@ -14,15 +14,18 @@ namespace Core.App.Controllers
         #endregion
 
         #region External Clients
+        External.Lib.IBlogService _blogHttpClientExt;
         External.Lib.IArticleService _articleNetTcpClientExt;
         #endregion
         public HomeController(Connected.Service.BlogService.IBlogService blogHttpClient,
             Connected.Service.ArticleService.IArticleService articleNetTcpClient,
+            External.Lib.IBlogService blogHttpClientExt,
             External.Lib.IArticleService articleNetTcpClientExt)
         {
             _blogHttpClient = blogHttpClient;
             _articleNetTcpClient = articleNetTcpClient;
 
+            _blogHttpClientExt = blogHttpClientExt;
             _articleNetTcpClientExt = articleNetTcpClientExt;
         }
         // GET: /<controller>/
@@ -30,11 +33,14 @@ namespace Core.App.Controllers
         {
             Connected.Service.BlogService.Blog _blog = GetBlog();
             ViewBag.Blog = _blog;
+            var firstBlog = GetBlog(1);
 
             //Connected.Service.ArticleService.Article[] _articles = GetArticles();
             External.Lib.Article[] _articles = GetArticlesExt();
             return View(_articles);
         }
+
+        #region Connected Service methods
 
         private Connected.Service.BlogService.Blog GetBlog()
         {
@@ -46,9 +52,20 @@ namespace Core.App.Controllers
             return _articleNetTcpClient.GetAllAsync().Result;
         }
 
+        #endregion
+
+        #region External Clients methods
+
         private External.Lib.Article[] GetArticlesExt()
         {
             return _articleNetTcpClientExt.GetAllAsync().Result;
         }
+
+        private External.Lib.Blog GetBlog(int id)
+        {
+            return _blogHttpClientExt.GetByIdAsync(id).Result;
+        }
+
+        #endregion  
     }
 }

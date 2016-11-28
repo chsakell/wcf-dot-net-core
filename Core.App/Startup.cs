@@ -27,6 +27,10 @@ namespace Core.App
                 "net.tcp://localhost:8080/ArticleNetTcpService"));
 
             // External Lib services
+            var basicHttpBinding = new BasicHttpBinding();
+            services.AddSingleton(typeof(External.Lib.IBlogService),
+                new External.Lib.BlogServiceClientExt(basicHttpBinding, new EndpointAddress("http://localhost:8090/BlogHttpService")));
+
             var netTcpBinding = new NetTcpBinding();
             services.AddSingleton(typeof(External.Lib.IArticleService),
                 new External.Lib.ArticleServiceClientExt(netTcpBinding, new EndpointAddress("net.tcp://localhost:8080/ArticleNetTcpService")));
