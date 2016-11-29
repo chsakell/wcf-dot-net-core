@@ -2,7 +2,7 @@
 The solution self hosts a WCF Service <i>(two endpoints - BasicHttpBinding and NetTcpBinding)</i> to be consumed by the following two different types of .NET Core proxies
 <ol>
 <li>Proxies created using the <a href="https://marketplace.visualstudio.com/items?itemName=erikcai-MSFT.VisualStudioWCFConnectedService">Visual Studio WCF Connected Service</a> extension</li>
-<li>Proxies created manualy <i>(totally cross-platform library)</i></li>
+<li>Proxies created manually <i>(cross-platform library)</i></li>
 </ol>
 <h3>Instructions</h3>
 <ol>
