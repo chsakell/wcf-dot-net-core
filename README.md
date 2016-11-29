@@ -20,4 +20,4 @@ The solution self hosts a WCF Service <i>(two endpoints - BasicHttpBinding and N
 <li><a href="https://github.com/chsakell/wcf-dot-net-core/tree/master/Core.App">Core.App</a> is a .NET Core MVC Web Application that references the previous projects in order to consume a WCF Service via HTTP and TCP</li>
 </ul>
 <h3>License</h3>
-Code released under the <a href="https://github.com/chsakell/angular2-features/blob/master/licence" target="_blank"> MIT license</a>.
+Code released under the <a href="https://github.com/chsakell/wcf-dot-net-core/blob/master/licence" target="_blank"> MIT license</a>.
