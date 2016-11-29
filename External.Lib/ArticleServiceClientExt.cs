@@ -46,6 +46,16 @@ namespace External.Lib
             return Channel.UpdateAsync(article);
         }
 
+        Task IArticleService.OpenAsync()
+        {
+            return Task.Factory.FromAsync(((ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((ICommunicationObject)(this)).EndOpen));
+        }
+
+        Task IArticleService.CloseAsync()
+        {
+            return Task.Factory.FromAsync(((ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((ICommunicationObject)(this)).EndClose));
+        }
+
         #endregion
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace Core.App.Controllers
@@ -17,17 +18,22 @@ namespace Core.App.Controllers
         External.Lib.IBlogService _blogHttpClientExt;
         External.Lib.IArticleService _articleNetTcpClientExt;
         #endregion
+
+        #region Constructor
         public HomeController(Connected.Service.BlogService.IBlogService blogHttpClient,
-            Connected.Service.ArticleService.IArticleService articleNetTcpClient,
-            External.Lib.IBlogService blogHttpClientExt,
-            External.Lib.IArticleService articleNetTcpClientExt)
+            Connected.Service.ArticleService.IArticleService articleNetTcpClient)
         {
             _blogHttpClient = blogHttpClient;
             _articleNetTcpClient = articleNetTcpClient;
 
-            _blogHttpClientExt = blogHttpClientExt;
-            _articleNetTcpClientExt = articleNetTcpClientExt;
+            _blogHttpClientExt = new External.Lib.BlogServiceClientExt(new BasicHttpBinding(), 
+                new EndpointAddress("http://localhost:8090/BlogHttpService"));
+            _articleNetTcpClientExt = new External.Lib.ArticleServiceClientExt(new NetTcpBinding(), 
+                new EndpointAddress("net.tcp://localhost:8080/ArticleNetTcpService"));
         }
+        #endregion
+
+        #region Actions
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -37,8 +43,13 @@ namespace Core.App.Controllers
 
             //Connected.Service.ArticleService.Article[] _articles = GetArticles();
             External.Lib.Article[] _articles = GetArticlesExt();
+
+            // Close External Clients
+            CloseWcfClients();
+
             return View(_articles);
         }
+        #endregion
 
         #region Connected Service methods
 
@@ -67,5 +78,14 @@ namespace Core.App.Controllers
         }
 
         #endregion  
+
+        /// <summary>
+        /// Always make sure to close clients
+        /// </summary>
+        void CloseWcfClients()
+        {
+            _blogHttpClientExt.CloseAsync();
+            _articleNetTcpClientExt.CloseAsync();
+        }
     }
 }

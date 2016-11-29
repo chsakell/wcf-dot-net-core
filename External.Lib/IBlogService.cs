@@ -21,6 +21,10 @@ namespace External.Lib
 
         [OperationContract]
         Task<Blog> GetByIdAsync(int id);
+
+        Task OpenAsync();
+
+        Task CloseAsync();
     }
 
     [DataContract(Namespace = "http://www.chsakell.com/dotnetcorewcfproxies")]

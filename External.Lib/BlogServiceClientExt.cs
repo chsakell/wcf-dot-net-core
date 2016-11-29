@@ -40,6 +40,16 @@ namespace External.Lib
         {
             return Channel.UpdateAsync(blog);
         }
+
+        Task IBlogService.OpenAsync()
+        {
+            return Task.Factory.FromAsync(((ICommunicationObject)(this)).BeginOpen(null, null), new System.Action<System.IAsyncResult>(((ICommunicationObject)(this)).EndOpen));
+        }
+
+        Task IBlogService.CloseAsync()
+        {
+            return Task.Factory.FromAsync(((ICommunicationObject)(this)).BeginClose(null, null), new System.Action<System.IAsyncResult>(((ICommunicationObject)(this)).EndClose));
+        }
         #endregion
     }
 }
