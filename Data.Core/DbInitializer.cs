@@ -22,6 +22,15 @@ namespace Data.Core
 
             context.ArticleSet.Add(new Business.Entities.Article
             {
+                Title = "Real-time applications using ASP.NET Core, SignalR & Angular",
+                Contents = "Real-time web applications are apps that push user experience to the limits while trying to immediately reflect data changes to a great number of connected clients..",
+                Author = "Christos Sakellarios",
+                URL = "http://wp.me/p3mRWu-1b2",
+                BlogID = 1
+            });
+
+            context.ArticleSet.Add(new Business.Entities.Article
+            {
                 Title = "Cross-platform Single Page Applications with ASP.NET Core, Angular 2 & TypeScript",
                 Contents = "ASP.NET Core 1.0 and Angular 2 are probably the hottest new frameworks in terms of both of them are entirely re-written from scratch..",
                 Author = "Christos Sakellarios",
